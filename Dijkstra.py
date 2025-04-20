@@ -29,13 +29,15 @@ for n1, n2, p in graph:
     else:
         nodes[n1][n2] = p
 
-# 노드의 가중치합들 모음.
+# 노드별 상태변화 저장.
 p_node = dict.fromkeys(nodes.keys())
-p_node.update({"T": None}) # 종점 노드는 추가 해야함.
-p_node["S"] = (0, None)    # 시작 노드는 0
+
+st, end = "S", "T"         # 시작노드와 종점노드
+p_node[st] = (0, None)     # 시작 노드는 0
+p_node.update({end: None}) # 종점 노드는 추가 해야함.
 
 # 모든 노드를 방문하기 위해
-n1 = ["S"]
+n1 = [st]
 while n1:
     n = n1.pop(0)[0]
     for j, k in nodes[n].items():
@@ -47,12 +49,12 @@ while n1:
                 p_node[j] = (current_value, n)
 
     for i in nodes[n].keys():
-        if i != "T":                         # 종점 이후는 노드가 끝.
+        if i != end:                         # 종점 이후는 노드가 끝.
             n1.append(i)
 
 print(f"최단경로합: {p_node['T'][0]}")
 print("경로: ", end='')
-dir, i = [], "T"
+dir, i = [], end
 while True:
     if i == None:
         break
