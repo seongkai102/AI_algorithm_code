@@ -52,7 +52,7 @@ while n1:
         if i != end:                         # 종점 이후는 노드가 끝.
             n1.append(i)
 
-print(f"최단경로합: {p_node['T'][0]}")
+print(f"최단경로합: {p_node[end][0]}")
 print("경로: ", end='')
 dir, i = [], end
 while True:
